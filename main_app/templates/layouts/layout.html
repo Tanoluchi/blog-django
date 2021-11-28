@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Titulo de cada pagina en concreto-->
+    <title> 
+        {% block title %}
+         
+        {% endblock %}
+        | Valenzuela Luciano
+    </title>
+    <!-- Cargamos ficheros static -->
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <!-- Cabecera de la pagina -->
+    <header>
+        <div id="logotipo">
+            <img src="{% static 'img/logo.png' %}" alt="Logo de Django">
+            <h1>Proyecto con Django</h1>
+        </div>
+    </header>
+
+    <!-- Menu -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Inicio</a></li>
+            {% for page in pages %}
+                <li><a href="{% url 'page' page.2 %}">{{page.1}}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <!-- Para realizar efecto 3D-->
+    <div class="barra">
+        <span class="esquina-izq"></span>
+        <span class="relleno"></span>
+        <span class="esquina-der"></span>
+    </div>
+    
+    <!-- Contenido de la pagina -->
+    <div id="content">
+        <div class="box">
+            <!-- Bloque -->
+            <!-- Utilizara codigo que viene de templates -->
+            {% block content %}
+                <strong>Este es el contenido del bloque original</strong>
+            {% endblock %}
+        </div>
+        
+    </div>
+
+    <!-- Pie de la pagina-->
+    <footer>Primer pagina web con Django &copy; Valenzuela Luciano - {% now 'Y' %}</footer>
+
+</body>
+</html>
