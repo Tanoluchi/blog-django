@@ -3,4 +3,20 @@
 {% block title %} {{title}} {% endblock title %}
 {% block content  %}
     <h1>{{title}}</h1>
+    <hr>
+    {% comment "Imprimir mensajes" %}
+        Verificamos si hay mensajes, si lo hay los mostramos
+    {% endcomment %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class='success'>{{message}}</div>
+        {% endfor %}
+    {% endif %}
+
+    {% if user.email %}
+        <h2>Bienvenido, {{user.first_name}} {{user.last_name}}</h2>
+        {% else %}
+            <h2><a href="{% url 'login' %}">Identificate para visualizar mas cosas<a/></h2>
+    {% endif %}
+    
 {% endblock  %}

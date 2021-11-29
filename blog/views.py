@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from .models import Category, Article
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 # Traemos todos nuestros articulos y se lo pasamos a nuestro archivo HTML mediante render
+@login_required(login_url="login")
 def list_articles(request):
     # Sacar articulos
     articles = Article.objects.all()
@@ -20,6 +22,7 @@ def list_articles(request):
         'articles': page_article,
     })
 
+@login_required(login_url="login")
 def category(request, category_id):
     # Le pasamos el objeto y luego la condicion, si no se llega a cumplir y no existe el id
     # pues entonces se nos redireccionara a una pagina 404 (ERROR).
@@ -35,6 +38,7 @@ def category(request, category_id):
         #'articles': articles 
     })
 
+@login_required(login_url="login")
 def article(request, article_id):
     article = get_object_or_404(Article, id = article_id)
 
