@@ -1,0 +1,20 @@
+<div class='pagination'>
+    {% comment "" %}
+        Comprobamos si existe una pagina anterior, si es asi pintamos Primero y Anterior
+        asi el usuario puede volver a primer pagina o a la pagina anterior.
+    {% endcomment %}
+    {% if articles.has_previous %}
+        <a href="?page=1">&laquo; Primero</a>
+        <a href="?page={{ articles.previous_page_number }}">Anterior</a>
+    {%endif%}
+
+    <span class='actual'>Pagina {{articles.number}} de {{articles.paginator.num_pages}}</span>
+    {% comment "" %}
+        Comprobamos si existe una siguiente pagina, si es asi pintamos Siguiente
+        para luego poder avanzar hacia esa pagina
+    {% endcomment %}
+    {% if articles.has_next %}
+        <a href="?page={{ articles.next_page_number }}">Siguiente</a>
+        <a href="?page={{ articles.paginator.num_pages}}">Última &raquo;</a>
+    {%endif%}
+</div>
