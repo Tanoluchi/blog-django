@@ -15,9 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main_app.urls')),
-    path('', include('pages.urls'))
+    path('', include('pages.urls')),
+    path('', include('blog.urls')),
 ]
+
+# Ruta imagenes
+if settings.DEBUG:
+    # Utilizar la forma de cargar formas estaticos del framework para generar una URL basado en esos ficheros
+    #estaticos
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    
